@@ -9,85 +9,83 @@
     <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
 
     <style>
-        body { font-family: 'Prompt', sans-serif; overflow-x: hidden; }
+        html { scroll-behavior: smooth; } /* ทำให้การเลื่อนหน้าจอนุ่มนวล */
+        body { font-family: 'Prompt', sans-serif; margin: 0; padding: 0; }
         .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
-        .hidden-section { display: none; }
-        .fade-in { animation: fadeIn 1.2s ease-out forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
-        
-        /* ตกแต่งกรอบรูปเจ้าของวันเกิด */
-        .profile-frame {
-            border: 8px solid white;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-        }
+        .full-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; }
+        .profile-frame { border: 10px solid white; box-shadow: 0 15px 35px rgba(0,0,0,0.15); transition: transform 0.3s; }
+        .profile-frame:hover { transform: scale(1.02) rotate(0deg); }
     </style>
 </head>
-<body class="bg-gradient-to-br from-blue-50 via-white to-pink-50 min-h-screen">
+<body class="bg-gradient-to-br from-indigo-50 via-white to-pink-50">
 
-    <div id="page1" class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
-        <div class="glass p-8 rounded-3xl shadow-2xl max-w-sm w-full transition-all hover:rotate-2">
-            <h1 class="text-3xl font-bold text-gray-800 mb-6">You got a surprise! 🎁</h1>
+    <section id="cover" class="full-screen p-6 text-center">
+        <div class="glass p-8 rounded-[3rem] shadow-2xl max-w-sm w-full border border-white">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">Happy Birthday! 🎁</h1>
             
-            <div class="w-full aspect-square bg-gray-100 rounded-xl mb-6 overflow-hidden shadow-inner">
+            <div class="w-full aspect-square rounded-2xl mb-8 overflow-hidden shadow-lg">
                 <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUN7SjnSUo/giphy.gif" 
-                     id="gif1" class="w-full h-full object-cover" alt="Aesthetic GIF 1">
+                     class="w-full h-full object-cover" alt="GIF 1">
             </div>
             
-            <button onclick="startCelebration()" 
-                class="bg-gray-800 hover:bg-black text-white font-medium py-3 px-12 rounded-full shadow-lg transition-transform active:scale-90">
-                Tap to Open ✨
+            <button onclick="scrollToWishes()" 
+                class="bg-black text-white font-medium py-4 px-12 rounded-full shadow-xl hover:bg-gray-800 transition-all active:scale-90">
+                เลื่อนลงไปดูสิ ✨
             </button>
         </div>
-    </div>
+    </section>
 
-    <div id="page2" class="hidden-section flex flex-col items-center py-10 px-6">
-        <div class="max-w-md w-full space-y-6">
+    <section id="wishes" class="full-screen p-6 text-center bg-white/30">
+        <div class="max-w-md w-full py-10">
             
-            <div class="glass p-8 rounded-[2.5rem] shadow-2xl text-center fade-in">
-                
-                <div class="w-24 h-24 mx-auto mb-4">
-                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/oXpZ1s9Uu3W/giphy.gif" 
-                         id="gif2" class="w-full h-full object-contain" alt="Aesthetic GIF 2">
-                </div>
+            <div class="w-24 h-24 mx-auto mb-6">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/oXpZ1s9Uu3W/giphy.gif" 
+                     class="w-full h-full object-contain">
+            </div>
 
-                <h2 class="text-2xl font-bold text-gray-800 mb-6">Happy Birthday!</h2>
+            <h2 class="text-4xl font-bold text-gray-800 mb-10">Wishing You All the Best</h2>
 
-                <div class="relative w-56 h-56 mx-auto mb-8">
-                    <img src="https://via.placeholder.com/400x400?text=Birthday+Person" 
-                         id="birthdayPersonPhoto"
-                         class="profile-frame rounded-2xl w-full h-full object-cover rotate-3" 
-                         alt="Birthday Person">
-                    <div class="absolute -top-4 -right-4 text-4xl">🎂</div>
-                    <div class="absolute -bottom-4 -left-4 text-4xl">✨</div>
-                </div>
-                
-                <div class="text-gray-600 space-y-2 text-lg">
-                    <p class="font-medium">ขอให้มีความสุขมากๆ นะครับ</p>
-                    <p>คิดหวังสิ่งใดขอให้สมปรารถนาทุกประการ</p>
-                </div>
-
-                <div class="mt-8 pt-6 border-t border-gray-100">
-                    <p class="text-sm text-gray-400">From... [ชื่อของคุณ]</p>
+            <div class="relative w-64 h-64 mx-auto mb-10">
+                <img src="https://via.placeholder.com/500x500?text=Birthday+Photo" 
+                     id="birthdayPhoto"
+                     class="profile-frame rounded-3xl w-full h-full object-cover rotate-3">
+                <div class="absolute -top-6 -right-6 text-5xl">🎂</div>
+                <div class="absolute -bottom-6 -left-6 text-5xl">🎈</div>
+            </div>
+            
+            <div class="glass p-8 rounded-3xl text-gray-700 text-lg leading-relaxed shadow-lg">
+                <p class="mb-4">ขอให้มีความสุขมากๆ สุขภาพแข็งแรง</p>
+                <p>ขอให้ทุกความปรารถนาของคุณกลายเป็นจริงในเร็ววัน</p>
+                <div class="mt-8 pt-4 border-t border-gray-100">
+                    <p class="font-semibold text-gray-800">จาก... [ชื่อของคุณ]</p>
                 </div>
             </div>
 
-            <audio id="bgMusic" loop>
-                <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-            </audio>
-
+            <button onclick="window.scrollTo(0,0)" class="mt-10 text-gray-400 hover:text-black transition-colors">
+                ↑ กลับไปหน้าแรก
+            </button>
         </div>
-    </div>
+    </section>
+
+    <audio id="bgMusic" loop>
+        <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+    </audio>
 
     <script>
-        function startCelebration() {
-            document.getElementById('page1').classList.add('hidden-section');
-            document.getElementById('page2').classList.remove('hidden-section');
-            
-            const music = document.getElementById('bgMusic');
-            music.play().catch(e => console.log("Audio play failed"));
+        function scrollToWishes() {
+            // 1. เลื่อนลงไปที่ส่วนคำอวยพร
+            document.getElementById('wishes').scrollIntoView({ behavior: 'smooth' });
 
-            // เอฟเฟกต์พลุ
-            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
+            // 2. เล่นเพลง
+            const music = document.getElementById('bgMusic');
+            music.play().catch(e => console.log("Music play blocked"));
+
+            // 3. จุดพลุแบบกระจาย
+            confetti({
+                particleCount: 150,
+                spread: 100,
+                origin: { y: 0.8 }
+            });
         }
     </script>
 </body>
