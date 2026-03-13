@@ -12,46 +12,67 @@
         body { font-family: 'Prompt', sans-serif; overflow-x: hidden; }
         .glass { background: rgba(255, 255, 255, 0.9); backdrop-filter: blur(10px); }
         .hidden-section { display: none; }
-        .fade-in { animation: fadeIn 1.5s ease-in forwards; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+        .fade-in { animation: fadeIn 1.2s ease-out forwards; }
+        @keyframes fadeIn { from { opacity: 0; transform: scale(0.9); } to { opacity: 1; transform: scale(1); } }
+        
+        /* ตกแต่งกรอบรูปเจ้าของวันเกิด */
+        .profile-frame {
+            border: 8px solid white;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
     </style>
 </head>
-<body class="bg-gradient-to-br from-yellow-100 via-pink-100 to-purple-200 min-h-screen">
+<body class="bg-gradient-to-br from-blue-50 via-white to-pink-50 min-h-screen">
 
     <div id="page1" class="flex flex-col items-center justify-center min-h-screen p-6 text-center">
-        <div class="glass p-8 rounded-3xl shadow-2xl max-w-sm w-full transition-all hover:scale-105">
-            <h1 class="text-4xl font-bold text-pink-600 mb-6">You have a message! 💌</h1>
-            <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUN7SjnSUo/giphy.gif" 
-                 class="w-full rounded-xl mb-6 shadow-md" alt="Cute Cat GIF">
+        <div class="glass p-8 rounded-3xl shadow-2xl max-w-sm w-full transition-all hover:rotate-2">
+            <h1 class="text-3xl font-bold text-gray-800 mb-6">You got a surprise! 🎁</h1>
+            
+            <div class="w-full aspect-square bg-gray-100 rounded-xl mb-6 overflow-hidden shadow-inner">
+                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/ICOgUN7SjnSUo/giphy.gif" 
+                     id="gif1" class="w-full h-full object-cover" alt="Aesthetic GIF 1">
+            </div>
             
             <button onclick="startCelebration()" 
-                class="bg-pink-500 hover:bg-pink-600 text-white font-bold py-3 px-10 rounded-full text-lg shadow-lg transition-all active:scale-95">
-                เปิดดูเลย ✨
+                class="bg-gray-800 hover:bg-black text-white font-medium py-3 px-12 rounded-full shadow-lg transition-transform active:scale-90">
+                Tap to Open ✨
             </button>
         </div>
     </div>
 
-    <div id="page2" class="hidden-section flex flex-col items-center py-12 px-6">
-        <div class="max-w-2xl w-full space-y-8">
+    <div id="page2" class="hidden-section flex flex-col items-center py-10 px-6">
+        <div class="max-w-md w-full space-y-6">
             
-            <div class="glass p-10 rounded-[3rem] shadow-2xl text-center fade-in">
-                <h2 class="text-3xl font-bold text-gray-800 mb-4">Happy Birthday!</h2>
+            <div class="glass p-8 rounded-[2.5rem] shadow-2xl text-center fade-in">
                 
-                <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/oXpZ1s9Uu3W/giphy.gif" 
-                     class="w-64 h-64 mx-auto rounded-full object-cover mb-6 border-8 border-white shadow-xl" alt="Celebration GIF">
-                
-                <div class="text-gray-700 text-lg space-y-4">
-                    <p>ขอให้เป็นปีที่มีแต่ความสุข สุขภาพแข็งแรง</p>
-                    <p>มีรอยยิ้มที่สดใสในทุกๆ วันเลยนะ!</p>
+                <div class="w-24 h-24 mx-auto mb-4">
+                    <img src="https://media.giphy.com/media/v1.Y2lkPTc5MGI3NjExNHJndm80Z3R4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4bmZ4JmVwPXYxX2ludGVybmFsX2dpZl9ieV9pZCZjdD1n/oXpZ1s9Uu3W/giphy.gif" 
+                         id="gif2" class="w-full h-full object-contain" alt="Aesthetic GIF 2">
                 </div>
-                <div class="mt-8 pt-6 border-t border-pink-200">
-                    <p class="font-semibold text-pink-600">จาก... เพื่อนของคุณ 🎂</p>
+
+                <h2 class="text-2xl font-bold text-gray-800 mb-6">Happy Birthday!</h2>
+
+                <div class="relative w-56 h-56 mx-auto mb-8">
+                    <img src="https://via.placeholder.com/400x400?text=Birthday+Person" 
+                         id="birthdayPersonPhoto"
+                         class="profile-frame rounded-2xl w-full h-full object-cover rotate-3" 
+                         alt="Birthday Person">
+                    <div class="absolute -top-4 -right-4 text-4xl">🎂</div>
+                    <div class="absolute -bottom-4 -left-4 text-4xl">✨</div>
+                </div>
+                
+                <div class="text-gray-600 space-y-2 text-lg">
+                    <p class="font-medium">ขอให้มีความสุขมากๆ นะครับ</p>
+                    <p>คิดหวังสิ่งใดขอให้สมปรารถนาทุกประการ</p>
+                </div>
+
+                <div class="mt-8 pt-6 border-t border-gray-100">
+                    <p class="text-sm text-gray-400">From... [ชื่อของคุณ]</p>
                 </div>
             </div>
 
             <audio id="bgMusic" loop>
                 <source src="https://www.bensound.com/bensound-music/bensound-happybirthday.mp3" type="audio/mpeg">
-                เบราว์เซอร์ของคุณไม่รองรับการเล่นเพลง
             </audio>
 
         </div>
@@ -59,39 +80,14 @@
 
     <script>
         function startCelebration() {
-            // 1. ซ่อนหน้าแรก แสดงหน้าสอง
             document.getElementById('page1').classList.add('hidden-section');
             document.getElementById('page2').classList.remove('hidden-section');
-            document.getElementById('page2').classList.add('fade-in');
-
-            // 2. เล่นเพลง
+            
             const music = document.getElementById('bgMusic');
-            music.play().catch(error => console.log("Autoplay blocked:", error));
+            music.play().catch(e => console.log("Audio play failed"));
 
-            // 3. จุดพลุแบบต่อเนื่อง
-            const end = Date.now() + (5 * 1000);
-            const colors = ['#ff69b4', '#ff1493', '#ffd700'];
-
-            (function frame() {
-                confetti({
-                    particleCount: 3,
-                    angle: 60,
-                    spread: 55,
-                    origin: { x: 0 },
-                    colors: colors
-                });
-                confetti({
-                    particleCount: 3,
-                    angle: 120,
-                    spread: 55,
-                    origin: { x: 1 },
-                    colors: colors
-                });
-
-                if (Date.now() < end) {
-                    requestAnimationFrame(frame);
-                }
-            }());
+            // เอฟเฟกต์พลุ
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 } });
         }
     </script>
 </body>
